@@ -37,6 +37,7 @@ const Layanan = () => {
                 key={index}
                 batikImage={service.image}
                 title={service.title}
+                price={service.price}
                 buttonModal={
                   <ModalOrder
                     text={`Hello, I would like to book a ${service.title} session at Aura Bali Spa. Please confirm the availability. Thank you!`}
@@ -51,7 +52,7 @@ const Layanan = () => {
   );
 };
 
-const CardLayanan = ({ title, batikImage, buttonModal }) => {
+const CardLayanan = ({ title, price, batikImage, buttonModal }) => {
   return (
     <div className="card min-w-16 bg-second text-black shadow-md">
       <figure className="px-10 pt-10">
@@ -67,6 +68,7 @@ const CardLayanan = ({ title, batikImage, buttonModal }) => {
       </figure>
       <div className="card-body items-center text-center">
         <h2 className="card-title text-lg lg:text-2xl">{title}</h2>
+        <p className="text-sm text-gray-800">{price}</p>
         <div className="card-actions">{buttonModal}</div>
       </div>
     </div>
