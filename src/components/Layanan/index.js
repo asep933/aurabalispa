@@ -17,7 +17,7 @@ const Layanan = () => {
   return (
     <div className="bg-white pb-20 pt-20 flex flex-col gap-y-4 w-full">
       <h1 className="text-4xl font-semibold text-black pb-12 w-full text-center">
-        <span className="text-fourth">Our</span> Service
+        <span className="text-fourth">Our</span> Treatment
       </h1>
       <div
         id="customs"
