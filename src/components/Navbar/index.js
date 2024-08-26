@@ -54,11 +54,11 @@ const NavbarComponent = () => {
       <div
         className={`${
           isFixed ? "fixed" : "relative"
-        } w-full h-auto z-50 m-0 p-0 dark`}
+        } w-full h-auto z-50 m-0 p-0`}
       >
         <ProgresBar />
 
-        <div className="bg-primary dark:bg-gray-900 shadow-sm bg-opacity-80 backdrop-blur-sm text-black flex justify-around font-medium items-center">
+        <div className="bg-primary shadow-sm bg-opacity-80 backdrop-blur-sm text-black flex justify-around font-medium items-center">
           <div className="text-3xl">
             <Link href={"/"}>
               <Image
