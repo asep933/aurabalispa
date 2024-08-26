@@ -1,17 +1,18 @@
 import Image from "next/image";
-import Logo from "/public/logo.webp";
+import Logo from "/public/logo.jpg";
 
 const TentangPerusahaan = () => {
   return (
-    <div className="flex flex-col w-1/2 space-y-4 max-[820px]:w-full">
+    <div className="flex flex-col w-full space-y-4 md:w-full lg:w-1/2 max-[820px]:w-full">
       <Image src={Logo} alt="logo batik nasional" width={200} />
 
       <p>
-        Batik Nasional adalah sebuah perusahaan yang berdedikasi untuk
-        mempromosikan dan melestarikan warisan budaya Indonesia melalui seni
-        batik. Sebagai produsen batik terkemuka, kami menghadirkan koleksi batik
-        berkualitas tinggi yang menggabungkan desain modern dengan motif
-        tradisional yang khas.
+        Welcome to aurabalispa, a serene retreat where you can rejuvenate your
+        mind, body, and spirit. Our expert therapists are dedicated to providing
+        personalized treatments designed to restore balance and harmony.
+        Experience the art of relaxation in our tranquil environment, where
+        every detail is crafted to ensure your comfort and well-being. At
+        aurabalispa, your journey to renewal begins.
       </p>
     </div>
   );

@@ -9,12 +9,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#222831",
-        secondary: "#31363F",
-        third: "#76ABAE",
-        fourth: "#EEEEEE",
+        primary: "#F7F9F2",
+        secondary: "#91DDCF",
+        third: "#E8C5E5",
+        fourth: "#F19ED2",
       },
     },
   },
-  plugins: [require("daisyui"), require("flowbite/plugin")],
+  plugins: [require("daisyui")],
 };

@@ -2,34 +2,69 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import logo from "/public/logo.webp";
+import { useEffect, useState } from "react";
+import logo from "/public/logo.jpg";
+import ProgresBar from "@/components/Progres";
+import useHash from "@/lib/useHash";
 
 const NavbarComponent = () => {
   const [jasa, setJasa] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
   const [animation, setAnimation] = useState({
     beranda: false,
     produk: false,
     layanan: false,
     kontak: false,
-    masuk: false,
-    daftar: false,
   });
   const [humberger, setHumberger] = useState(false);
+  const hash = useHash();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setIsFixed(!0);
+      } else {
+        setIsFixed(!1);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (jasa) setAnimation({ layanan: true });
+    if (!jasa) setAnimation({ layanan: false });
+  }, [jasa]);
+
+  useEffect(() => {
+    switch (hash) {
+      case "":
+        return setAnimation({ beranda: true });
+      case "#service":
+        return setAnimation({ produk: true });
+      case "#contact":
+        return setAnimation({ kontak: true });
+    }
+  }, [hash]);
 
   return (
     <>
-      <div className="fixed w-full h-auto z-50">
-        <div
-          className="bg-secondary text-fourth flex justify-between 
-        font-medium items-center"
-        >
+      <div
+        className={`${
+          isFixed ? "fixed" : "relative"
+        } w-full h-auto z-50 m-0 p-0 dark`}
+      >
+        <ProgresBar />
+
+        <div className="bg-primary dark:bg-gray-900 shadow-sm bg-opacity-80 backdrop-blur-sm text-black flex justify-around font-medium items-center">
           <div className="text-3xl">
             <Link href={"/"}>
               <Image
                 src={logo}
                 alt="image logo"
-                className={`w-32 max-[820px]:w-28`}
+                className={`w-24 max-[820px]:w-20`}
               />
             </Link>
           </div>
@@ -41,7 +76,7 @@ const NavbarComponent = () => {
             >
               <Link href={"/"}>Beranda</Link>
               <div
-                className={`p-[2px] bg-third transition duration-300 ease-in-out ${
+                className={`p-[2px] bg-fourth transition duration-300 ease-in-out ${
                   animation.beranda ? "w-full" : "w-0"
                 } ${animation.beranda ? "opacity-100" : "opacity-0"}`}
               ></div>
@@ -50,22 +85,21 @@ const NavbarComponent = () => {
               onMouseLeave={() => setAnimation({ produk: false })}
               onMouseEnter={() => setAnimation({ produk: true })}
             >
-              <Link href={"#produk"}>Produk </Link>
+              <Link href={"#service"}>Gallery </Link>
               <div
-                className={`p-[2px] bg-third transition duration-300 ease-in-out ${
+                className={`p-[2px] bg-fourth transition duration-300 ease-in-out ${
                   animation.produk ? "w-full" : "w-0"
                 } ${animation.produk ? "opacity-100" : "opacity-0"}`}
               ></div>
             </div>
             <div
-              onMouseOver={() => setJasa(true)}
-              onMouseLeave={() => setAnimation({ layanan: false })}
+              onMouseOver={() => setJasa((value) => (value = true))}
               onMouseEnter={() => setAnimation({ layanan: true })}
             >
               <Link href={""}>
-                Layanan <span>↓</span>
+                Services <span>↓</span>
                 <div
-                  className={`p-[2px] bg-third transition duration-300 ease-in-out ${
+                  className={`p-[2px] bg-fourth transition duration-300 ease-in-out ${
                     animation.layanan ? "w-full" : "w-0"
                   } ${animation.layanan ? "opacity-100" : "opacity-0"}`}
                 ></div>
@@ -75,16 +109,15 @@ const NavbarComponent = () => {
               onMouseLeave={() => setAnimation({ kontak: false })}
               onMouseEnter={() => setAnimation({ kontak: true })}
             >
-              <Link href={"#footer"}>Kontak</Link>
+              <Link href={"#contact"}>Contact</Link>
               <div
-                className={`p-[2px] bg-third transition duration-300 ease-in-out ${
+                className={`p-[2px] bg-fourth transition duration-300 ease-in-out ${
                   animation.kontak ? "w-full" : "w-0"
                 } ${animation.kontak ? "opacity-100" : "opacity-0"}`}
               ></div>
             </div>
           </div>
 
-          <MasukDaftar animation={animation} setAnimation={setAnimation} />
           <Humberger humberger={humberger} setHumberger={setHumberger} />
         </div>
 
@@ -106,45 +139,8 @@ const NavbarComponent = () => {
   );
 };
 
-const MasukDaftar = ({ animation, setAnimation }) => {
-  return (
-    <div className="flex gap-x-8 mr-12 mobile-menu">
-      <div
-        onMouseLeave={() => setAnimation({ masuk: false })}
-        onMouseEnter={() => setAnimation({ masuk: true })}
-      >
-        <Link href={"/loginPage"}>Masuk</Link>
-        <div
-          className={`p-[2px] bg-third transition duration-300 ease-in-out ${
-            animation.masuk ? "w-full" : "w-0"
-          } ${animation.masuk ? "opacity-100" : "opacity-0"}`}
-        ></div>
-      </div>
-      <div
-        onMouseLeave={() => setAnimation({ daftar: false })}
-        onMouseEnter={() => setAnimation({ daftar: true })}
-      >
-        <Link href={"/daftarPage"}>Daftar</Link>
-        <div
-          className={`p-[2px] bg-third transition duration-300 ease-in-out ${
-            animation.daftar ? "w-full" : "w-0"
-          } ${animation.daftar ? "opacity-100" : "opacity-0"}`}
-        ></div>
-      </div>
-    </div>
-  );
-};
-
 // humberger
 const Humberger = ({ humberger, setHumberger }) => {
-  // const RefHumberger = useRef();
-
-  // console.log("ini refHumberger", RefHumberger);
-
-  // useEffect(() => {
-  //   return () => RefHumberger.current.classList.toggle("swap", "swap-rotate");
-  // }, []);
-
   return (
     <div className="hidden max-[820px]:block">
       <label className={`btn btn-circle mr-6`}>
@@ -173,14 +169,22 @@ const Humberger = ({ humberger, setHumberger }) => {
 const MenuMobile = ({ humberger, setHumberger }) => {
   const [layananMobile, setLayananMobile] = useState(false);
 
+  useEffect(() => {
+    document.body.style.overflow = humberger ? "hidden" : "auto";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [humberger]);
+
   return (
     <div
-      className="flex flex-col gap-x-8 mb-0 pt-16 fixed top-16
-    text-lg bg-secondary w-full z-20 items-center gap-y-4 text-fourth"
+      className="flex flex-col gap-x-8 mb-0 fixed topx-2 pt-24 h-screen
+    text-lg bg-primary w-full z-20 text-pria items-center gap-y-4 text-black"
     >
       <Link
         onClick={() => setHumberger(!humberger)}
-        className="hover:bg-primary w-full p-3 text-center"
+        className="hover:bg-white hover:text-black w-full px-2 py-2 text-center"
         href={"/"}
       >
         Beranda
@@ -188,10 +192,10 @@ const MenuMobile = ({ humberger, setHumberger }) => {
 
       <Link
         onClick={() => setHumberger(!humberger)}
-        className="hover:bg-primary w-full p-3 text-center"
-        href={"#produk"}
+        className="hover:bg-white hover:text-black w-full px-2 py-2 text-center"
+        href={"#service"}
       >
-        Produk{" "}
+        Gallery{" "}
       </Link>
 
       <div
@@ -200,37 +204,72 @@ const MenuMobile = ({ humberger, setHumberger }) => {
         onMouseEnter={() => setLayananMobile(true)}
       >
         <Link href={""}>
-          Layanan <span>↓</span>
+          Services <span>↓</span>
         </Link>
         {layananMobile && (
-          <div className="flex flex-col pl-4 pt-2">
+          <div className="flex flex-col pl-4 pt-2 lg:hidden">
             <Link
-              className="hover:text-third"
+              className="hover:bg-white hover:text-black"
               href={"#customs"}
               onClick={() => setHumberger(!humberger)}
             >
-              Custom
+              balinese masas
             </Link>
             <Link
-              className="hover:text-third"
-              href={"#souvenir"}
+              className="hover:bg-white hover:text-black"
+              href={"#customs"}
               onClick={() => setHumberger(!humberger)}
             >
-              Souvenir
+              aromatherapy
             </Link>
             <Link
-              className="hover:text-third"
-              href={"#digital"}
+              className="hover:bg-white hover:text-black"
+              href={"#customs"}
               onClick={() => setHumberger(!humberger)}
             >
-              Digital
+              hot stone massage
             </Link>
             <Link
-              className="hover:text-third"
-              href={"#eksklusif"}
+              className="hover:bg-white hover:text-black"
+              href={"#customs"}
               onClick={() => setHumberger(!humberger)}
             >
-              Eksklusif
+              refleksi
+            </Link>
+            <Link
+              className="hover:bg-white hover:text-black"
+              href={"#customs"}
+              onClick={() => setHumberger(!humberger)}
+            >
+              foot scrub
+            </Link>
+            <Link
+              className="hover:bg-white hover:text-black"
+              href={"#customs"}
+              onClick={() => setHumberger(!humberger)}
+            >
+              medical massage
+            </Link>
+            <Link
+              className="hover:bg-white hover:text-black"
+              href={"#customs"}
+              onClick={() => setHumberger(!humberger)}
+            >
+              deep tissue
+            </Link>
+            <Link
+              className="hover:bg-white hover:text-black"
+              href={"#customs"}
+              onClick={() => setHumberger(!humberger)}
+            >
+              bamboo massage
+            </Link>
+            <Link
+              className="hover:bg-white hover:text-black"
+              href={"#customs"}
+              onClick={() => setHumberger(!humberger)}
+            >
+              facial
             </Link>
           </div>
         )}
@@ -238,65 +277,99 @@ const MenuMobile = ({ humberger, setHumberger }) => {
 
       <Link
         onClick={() => setHumberger(!humberger)}
-        className="hover:bg-primary w-full p-3 text-center"
-        href={"#footer"}
+        className="hover:bg-white hover:text-black w-full px-2 py-2 text-center"
+        href={"#contact"}
       >
-        Kontak
-      </Link>
-
-      <Link
-        onClick={() => setHumberger(!humberger)}
-        className="hover:bg-primary w-full p-3 text-center"
-        href={"/loginPage"}
-      >
-        Masuk
-      </Link>
-      <Link
-        onClick={() => setHumberger(!humberger)}
-        className="hover:bg-primary w-full p-3 text-center"
-        href={"/daftarPage"}
-      >
-        Daftar
+        Contact
       </Link>
     </div>
   );
 };
 
 const MenuJasa = ({ setJasa, jasa }) => {
+  const handleHref = (id) => {
+    setJasa(!jasa);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div
       onMouseLeave={() => setJasa(false)}
       onMouseEnter={() => setJasa(true)}
-      className="absolute bg-fourth text-primary w-full flex 
-    justify-center gap-x-5"
+      className="absolute bg-secondary capitalize text-primary w-full lg:flex justify-center gap-x-3 hidden"
     >
       <Link
-        onClick={() => setJasa(!jasa)}
-        className="hover:bg-secondary hover:text-fourth transition duration-300 ease-in-out p-3"
+        onClick={() => handleHref("customs")}
+        className="hover:bg-white hover:text-black transition duration-300 ease-in-out px-2 py-2"
         href={"#customs"}
       >
-        Costum
+        balinese massage
       </Link>
       <Link
-        onClick={() => setJasa(!jasa)}
-        className="hover:bg-secondary hover:text-fourth transition duration-300 ease-in-out p-3"
-        href={"#souvenir"}
+        onClick={() => handleHref("customs")}
+        className="hover:bg-white hover:text-black transition duration-300 ease-in-out px-2 py-2"
+        href={"#customs"}
       >
-        Souvenir
+        aromatherapy
       </Link>
       <Link
-        onClick={() => setJasa(!jasa)}
-        className="hover:bg-secondary hover:text-fourth transition duration-300 ease-in-out p-3"
-        href={"#digital"}
+        onClick={() => handleHref("customs")}
+        className="hover:bg-white hover:text-black transition duration-300 ease-in-out px-2 py-2"
+        href={"#customs"}
       >
-        Digital
+        hot stone massage
       </Link>
       <Link
-        onClick={() => setJasa(!jasa)}
-        className="hover:bg-secondary hover:text-fourth transition duration-300 ease-in-out p-3"
-        href={"#eksklusif"}
+        onClick={() => handleHref("customs")}
+        className="hover:bg-white hover:text-black transition duration-300 ease-in-out px-2 py-2"
+        href={"#customs"}
       >
-        Eksklusif
+        refleksi
+      </Link>
+      <Link
+        onClick={() => handleHref("customs")}
+        className="hover:bg-white hover:text-black transition duration-300 ease-in-out px-2 py-2"
+        href={"#customs"}
+      >
+        foot scrub
+      </Link>
+      <Link
+        onClick={() => handleHref("customs")}
+        className="hover:bg-white hover:text-black transition duration-300 ease-in-out px-2 py-2"
+        href={"#customs"}
+      >
+        body scrub
+      </Link>
+      <Link
+        onClick={() => handleHref("customs")}
+        className="hover:bg-white hover:text-black transition duration-300 ease-in-out px-2 py-2"
+        href={"#customs"}
+      >
+        medical massage
+      </Link>
+      <Link
+        onClick={() => handleHref("customs")}
+        className="hover:bg-white hover:text-black transition duration-300 ease-in-out px-2 py-2"
+        href={"#customs"}
+      >
+        deep tissue
+      </Link>
+      <Link
+        onClick={() => handleHref("customs")}
+        className="hover:bg-white hover:text-black transition duration-300 ease-in-out px-2 py-2"
+        href={"#customs"}
+      >
+        bamboo massage
+      </Link>
+      <Link
+        onClick={() => handleHref("customs")}
+        className="hover:bg-white hover:text-black transition duration-300 ease-in-out px-2 py-2"
+        href={"#customs"}
+      >
+        facial
       </Link>
     </div>
   );

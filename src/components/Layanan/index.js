@@ -4,59 +4,46 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import batikCustom from "/public/batik-custom.webp";
-import batikSouvenir from "/public/batik-souvenir.jpg";
-import batikDigital from "/public/batik-digital.jpg";
-import batikEksklusif from "/public/batik-eksklusif.jpg";
 import ModalOrder from "../ModalOrder";
+import { SERVICES } from "@/lib/services.js";
 
 const Layanan = () => {
-  const [statusModal, setStatusModal] = useState(false);
+  const [services, setServices] = useState(SERVICES);
 
   useEffect(() => {
     AOS.init();
   }, []);
 
   return (
-    <div className="bg-primary pb-24 pt-20 flex flex-col gap-y-4 w-full">
-      <h1 className="text-4xl font-semibold text-fourth pb-12 w-full text-center">
-        Layanan Kami
+    <div className="bg-white pb-20 pt-20 flex flex-col gap-y-4 w-full">
+      <h1 className="text-4xl font-semibold text-black pb-12 w-full text-center">
+        <span className="text-fourth">Our</span> Service
       </h1>
       <div
+        id="customs"
         className="w-full h-full flex gap-y-3 justify-center 
     flex-col items-center"
       >
         <div
-          className="max-w-full grid grid-cols-2 gap-8 px-52 overflow-auto
+          className="max-w-full flex justify-center gap-8 px-52 overflow-auto
         max-[820px]:grid-cols-1 max-[820px]:px-4"
         >
-          <div id="customs" data-aos="fade-right">
-            <CardLayanan
-              batikImage={batikCustom}
-              title={"Custom"}
-              buttonModal={<ModalOrder />}
-            />
-          </div>
-          <div id="souvenir" data-aos="fade-left">
-            <CardLayanan
-              batikImage={batikSouvenir}
-              title={"Souvenir"}
-              buttonModal={<ModalOrder />}
-            />
-          </div>
-          <div id="digital" data-aos="fade-right">
-            <CardLayanan
-              batikImage={batikDigital}
-              title={"Digital"}
-              buttonModal={<ModalOrder />}
-            />
-          </div>
-          <div id="eksklusif" data-aos="fade-left">
-            <CardLayanan
-              batikImage={batikEksklusif}
-              title={"Eksklusif"}
-              buttonModal={<ModalOrder />}
-            />
+          <div
+            className="grid grid-cols-2 lg:grid-cols-3 gap-5 capitalize"
+            data-aos="fade-right"
+          >
+            {services?.map((service, index) => (
+              <CardLayanan
+                key={index}
+                batikImage={service.image}
+                title={service.title}
+                buttonModal={
+                  <ModalOrder
+                    text={`Hello, I would like to book a ${service.title} session at Aura Bali Spa. Please confirm the availability. Thank you!`}
+                  />
+                }
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -66,28 +53,21 @@ const Layanan = () => {
 
 const CardLayanan = ({ title, batikImage, buttonModal }) => {
   return (
-    <div className="card min-w-16 bg-fourth shadow-xl">
+    <div className="card min-w-16 bg-second text-black shadow-md">
       <figure className="px-10 pt-10">
-        <div className="overflow-hidden h-44">
+        <div className="overflow-hidden h-auto lg:h-44">
           <Image
             src={batikImage}
-            alt="image batik"
-            width={200}
+            alt={title}
+            width={500}
+            height={300}
             className="rounded-xl object-cover hover:scale-110 transition-all ease-in-out"
           />
         </div>
       </figure>
       <div className="card-body items-center text-center">
-        <h2 className="card-title text-2xl">{title}</h2>
-        <div className="card-actions">
-          {/* <button
-            className="btn border-2 border-third bg-transparent hover:bg-third
-          hover:text-fourth"
-          >
-            Checkout
-          </button> */}
-          {buttonModal}
-        </div>
+        <h2 className="card-title text-lg lg:text-2xl">{title}</h2>
+        <div className="card-actions">{buttonModal}</div>
       </div>
     </div>
   );

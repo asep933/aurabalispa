@@ -5,7 +5,7 @@ import Link from "next/link";
 const ButtonWhatsApp = () => {
   return (
     <Link
-      href={"https://wa.me/6285872256552"}
+      href={"https://wa.me/6285333707305"}
       target="_blank"
       className="fixed bottom-16 right-8 hover:scale-110 transition*
     duration-300 ease-in-out"

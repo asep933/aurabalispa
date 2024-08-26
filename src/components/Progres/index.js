@@ -1,6 +1,5 @@
 "use client";
 
-import { Progress } from "flowbite-react";
 import { useEffect, useState } from "react";
 
 const ProgresBar = () => {
@@ -21,14 +20,11 @@ const ProgresBar = () => {
   }, [value]);
 
   return (
-    <>
-      <Progress
-        progress={value}
-        color="cyan"
-        size="sm"
-        className="fixed z-[999]"
-      />
-    </>
+    <progress
+      className="progress h-[3px] progress-accent w-full"
+      value={value}
+      max="100"
+    ></progress>
   );
 };
 

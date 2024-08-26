@@ -3,60 +3,38 @@
 import Image from "next/image";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
-import batikSatu from "/public/batik-1.png";
-import batikDua from "/public/batik-2.jpg";
-import batikTiga from "/public/batik-3.jpg";
-import batikEmpat from "/public/batik-4.jpg";
+import { useEffect, useState } from "react";
+import { GALLERIES } from "@/lib/galleries.js";
 
 const Card = () => {
+  const [galleries, setGalleries] = useState(GALLERIES);
+
   useEffect(() => {
     AOS.init();
   }, []);
 
   return (
     <div className="flex justify-center drop-shadow-md" data-aos="zoom-in">
-      <CarouselProduct />
+      <CarouselProduct galleries={galleries} />
     </div>
   );
 };
 
-const CarouselProduct = () => {
+const CarouselProduct = ({ galleries }) => {
   return (
     <div className="w-full px-52 max-[820px]:px-0">
       <div className="carousel carousel-end rounded-box min-w-full flex">
-        <div className="carousel-item">
-          <Image
-            className="object-cover "
-            src={batikSatu}
-            alt="image produk"
-            width={250}
-          />
-        </div>
-        <div className="carousel-item">
-          <Image
-            className="object-cover "
-            src={batikDua}
-            alt="image produk"
-            width={250}
-          />
-        </div>
-        <div className="carousel-item">
-          <Image
-            className="object-cover "
-            src={batikTiga}
-            alt="image produk"
-            width={250}
-          />
-        </div>
-        <div className="carousel-item">
-          <Image
-            className="object-cover "
-            src={batikEmpat}
-            alt="image produk"
-            width={250}
-          />
-        </div>
+        {galleries?.map((gallery, index) => (
+          <div key={index} className="carousel-item">
+            <Image
+              className="object-cover"
+              src={gallery.image}
+              alt={gallery.title}
+              width={250}
+              height={250}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

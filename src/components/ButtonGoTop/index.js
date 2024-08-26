@@ -30,7 +30,7 @@ const ButtonGoTop = () => {
     >
       {status && (
         <button
-          className="-rotate-90 bg-third rounded-full hover:animate-pulse
+          className="-rotate-90 bg-secondary rounded-full hover:animate-pulse
         "
         >
           <Image src={arrow} alt="icon arrow" width={42} />
