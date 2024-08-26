@@ -27,23 +27,23 @@ const Contact = () => {
     <>
       <div
         id="contact"
-        className="relative py-8 sm:py-16 md:py-28 lg:py-32 flex items-top justify-center bg-white dark:bg-gray-900 sm:items-center sm:pt-0"
+        className="relative py-8 sm:py-16 md:py-28 lg:py-32 flex items-top justify-center bg-white sm:items-center sm:pt-0"
       >
         <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
           <div className="mt-8 overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div
                 data-aos="fade-right"
-                className="p-6 mr-2 bg-primary dark:bg-gray-800 sm:rounded-lg"
+                className="p-6 mr-2 bg-primary sm:rounded-lg"
               >
-                <h1 className="text-4xl sm:text-5xl text-gray-800 dark:text-white font-extrabold tracking-tight">
+                <h1 className="text-4xl sm:text-5xl text-gray-800-extrabold tracking-tight">
                   Get in touch
                 </h1>
-                <p className="text-normal text-lg sm:text-2xl font-medium text-gray-600 dark:text-gray-400 mt-2">
+                <p className="text-normal text-lg sm:text-2xl font-medium text-gray-600 mt-2">
                   Fill in the form to start a conversation
                 </p>
-                <div className="flex items-center mt-8 text-gray-600 dark:text-gray-400"></div>
-                <div className="flex items-center mt-4 text-gray-600 dark:text-gray-400">
+                <div className="flex items-center mt-8 text-gray-600"></div>
+                <div className="flex items-center mt-4 text-gray-600">
                   <svg
                     fill="none"
                     stroke="currentColor"
@@ -64,7 +64,7 @@ const Contact = () => {
                     +6282340699547
                   </div>
                 </div>
-                <div className="flex items-center mt-2 text-gray-600 dark:text-gray-400">
+                <div className="flex items-center mt-2 text-gray-600">
                   <svg
                     fill="none"
                     stroke="currentColor"
@@ -101,7 +101,7 @@ const Contact = () => {
                     type="text"
                     name="subject"
                     placeholder="Subject"
-                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
+                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white border border-gray-400 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
                     onChange={handleChange}
                   />
                 </div>
@@ -112,7 +112,7 @@ const Contact = () => {
                   <textarea
                     name="body"
                     placeholder="body"
-                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
+                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white border border-gray-400 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
                     defaultValue={""}
                     onChange={handleChange}
                   />

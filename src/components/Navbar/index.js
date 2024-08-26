@@ -143,7 +143,7 @@ const NavbarComponent = () => {
 const Humberger = ({ humberger, setHumberger }) => {
   return (
     <div className="hidden max-[820px]:block">
-      <label className={`btn btn-circle mr-6`}>
+      <label className={`btn btn-circle mr-6 dark:bg-primary`}>
         <input
           type="checkbox"
           onClick={() => setHumberger(!humberger)}
@@ -152,7 +152,7 @@ const Humberger = ({ humberger, setHumberger }) => {
 
         {/* hamburger icon */}
         <svg
-          className="swap-off fill-current"
+          className="swap-off fill-current dark:fill-gray-900"
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
