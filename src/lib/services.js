@@ -39,7 +39,7 @@ export const SERVICES = () => {
     { title: "body scrub", price: "150k", image: imageSix },
     {
       title: "medical massage",
-      price: "200k/60minutes",
+      price: "200k/60 minutes",
       image: imageSeven,
     },
     {
