@@ -97,7 +97,7 @@ const NavbarComponent = () => {
               onMouseEnter={() => setAnimation({ layanan: true })}
             >
               <Link href={""}>
-                Services <span>↓</span>
+                Treatments <span>↓</span>
                 <div
                   className={`p-[2px] bg-fourth transition duration-300 ease-in-out ${
                     animation.layanan ? "w-full" : "w-0"
@@ -204,7 +204,7 @@ const MenuMobile = ({ humberger, setHumberger }) => {
         onMouseEnter={() => setLayananMobile(true)}
       >
         <Link href={""}>
-          Services <span>↓</span>
+          Treatments <span>↓</span>
         </Link>
         {layananMobile && (
           <div className="flex flex-col pl-4 pt-2 lg:hidden">

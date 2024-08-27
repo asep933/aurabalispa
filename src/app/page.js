@@ -1,16 +1,16 @@
 "use client";
 
 import Contact from "@/components/Contact";
+import Gallery from "@/components/Gallery";
 import Hero from "@/components/Hero";
 import Layanan from "@/components/Layanan";
-import Produk from "@/components/Produk";
 
 const Page = () => {
   return (
     <main className="bg-transparent overflow-auto">
       <Hero />
       <Layanan />
-      <Produk />
+      <Gallery />
       <Contact />
     </main>
   );
