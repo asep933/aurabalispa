@@ -1,5 +1,7 @@
 # Aura Bali Spa
 
+![Aura Bali Spa](public/aurabalispa.PNG)
+
 **Aura Bali Spa** is a luxurious spa experience located in the heart of Bali. This website serves as the perfect introduction to the tranquil and rejuvenating services we offer.
 
 ## Production Website
@@ -26,7 +28,3 @@ The website is deployed and managed using [deployment method/technology], ensuri
 ## How to Contribute
 
 While the website is in production, we welcome feedback and suggestions. Please open an issue or submit a pull request for any improvements or new features.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
